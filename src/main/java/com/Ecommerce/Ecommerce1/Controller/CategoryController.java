@@ -1,12 +1,12 @@
 package com.Ecommerce.Ecommerce1.Controller;
 
-
 import com.Ecommerce.Ecommerce1.Entity.Category;
 import com.Ecommerce.Ecommerce1.Exception.CategoryNotFoundException;
 import com.Ecommerce.Ecommerce1.Service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +25,7 @@ public class CategoryController {
         return new ResponseEntity<>(createdCategory, HttpStatus.CREATED);
     }
 
+//   @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable int id) {
         Optional<Category> category = categoryService.getCategoryById(id);
@@ -32,6 +33,7 @@ public class CategoryController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+//   @PreAuthorize("hasRole('USER')")
     @GetMapping
     public ResponseEntity<List<Category>> getAllCategories() {
         List<Category> categories = categoryService.getAllCategories();
