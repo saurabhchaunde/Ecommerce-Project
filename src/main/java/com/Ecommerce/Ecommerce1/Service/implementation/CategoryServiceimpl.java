@@ -1,6 +1,7 @@
 package com.Ecommerce.Ecommerce1.Service.implementation;
 
 import com.Ecommerce.Ecommerce1.Entity.Category;
+import com.Ecommerce.Ecommerce1.Entity.Product;
 import com.Ecommerce.Ecommerce1.Exception.CategoryNotFoundException;
 import com.Ecommerce.Ecommerce1.Repository.CategoryRepository;
 import com.Ecommerce.Ecommerce1.Service.CategoryService;
@@ -14,6 +15,7 @@ public class CategoryServiceimpl implements CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
     @Override
     public Category createCategory(Category category) {
         return categoryRepository.save(category);
@@ -48,4 +50,6 @@ public class CategoryServiceimpl implements CategoryService {
         }
         categoryRepository.deleteById(id);
     }
+
+
 }

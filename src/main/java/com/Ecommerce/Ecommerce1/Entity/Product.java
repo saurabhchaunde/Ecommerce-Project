@@ -1,4 +1,6 @@
 package com.Ecommerce.Ecommerce1.Entity;
+
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +16,6 @@ public class Product {
     private  int id;
 
     private String name;
-
     private String brand;
 
     @ManyToOne
@@ -27,4 +28,6 @@ public class Product {
     private int price;
 
     private int discount;
+
+
 }

@@ -32,6 +32,8 @@ class OrderServiceTest {
 
     @InjectMocks
     private OrderServiceimpl orderService;
+    private Order order;
+    private Product product;
 
     @BeforeEach
     void setUp() {
@@ -40,21 +42,24 @@ class OrderServiceTest {
 
     @Test
     void createOrder() {
-        Product product = new Product();
-        product.setId(1);
-        product.setPrice(100);
-        Order order = new Order();
-        order.setQuantity(2);
+        order = new Order();
+        order.setQuantity(5);
         order.setProductId(1);
 
-        when(productRepository.findById(anyInt())).thenReturn(Optional.of(product));
+        product = new Product();
+        product.setId(1);
+        product.setPrice(100);
+        product.setDiscount(10);
+
+        when(productRepository.findById(1)).thenReturn(Optional.of(product));
         when(orderRepository.save(any(Order.class))).thenReturn(order);
 
         Order createdOrder = orderService.createOrder(order);
+        int initalAmout=order.getQuantity() * product.getPrice();
 
-        assertNotNull(createdOrder);
-        assertEquals(200, createdOrder.getAmount());
-        verify(productRepository, times(1)).findById(1);
+        int expectedAmount = (initalAmout * product.getDiscount() ) / 100;
+
+        assertEquals(expectedAmount, createdOrder.getAmount());
         verify(orderRepository, times(1)).save(order);
     }
 

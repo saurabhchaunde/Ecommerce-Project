@@ -13,7 +13,7 @@ public class EcommerceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EcommerceApplication.class, args);
 		System.out.println("Application started !  1000% ");
-		logger.info("hey buddy");
+		//logger.info("hey buddy");
+		logger.info(" Ecommerce Application ");
 	}
-
 }
