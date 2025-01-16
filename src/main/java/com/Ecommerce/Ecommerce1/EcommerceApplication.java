@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 
-@SpringBootApplication // Allow requests from this origin
-@CrossOrigin
+@SpringBootApplication
+@CrossOrigin //Allow requests from this origin
 public class EcommerceApplication {
 
 	private final static  Logger logger = LoggerFactory.getLogger(EcommerceApplication.class);
