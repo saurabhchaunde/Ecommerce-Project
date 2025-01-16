@@ -10,16 +10,17 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 public class UserController {
+
     @Autowired
     private UserService service;
 
-
     @PostMapping("/register")
-    public Users register(@RequestBody Users user) {
+    public Users registerUser(@RequestBody Users user) {
         return service.register(user);
-
     }
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody Users user) {
         // Attempt to verify user and generate a token
@@ -32,15 +33,7 @@ public class UserController {
         }
         LoginResponse response = new LoginResponse(true, token);
         return ResponseEntity.ok(response);
-
     }
-
-//    @PostMapping("/login")
-//    public String login(@RequestBody Users user) {
-//
-//        return service.verify(user);
-//    }
-
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/home")

@@ -15,11 +15,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+@CrossOrigin
 public class SecurityConfig {
 
     @Autowired
@@ -28,9 +30,11 @@ public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
+                .cors(cors -> {})
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/home").hasAnyRole("USER","ADMIN")
                         .requestMatchers("/dash").hasRole("ADMIN")
@@ -42,7 +46,6 @@ public class SecurityConfig {
                 .httpBasic(withDefaults())
                 .build();
     }
-
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
