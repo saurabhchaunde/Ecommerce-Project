@@ -50,6 +50,4 @@ public class CategoryServiceimpl implements CategoryService {
         }
         categoryRepository.deleteById(id);
     }
-
-
 }
